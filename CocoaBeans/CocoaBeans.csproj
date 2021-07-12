@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Maila.Cocoa.Beans</AssemblyName>
+    <RootNamespace>Maila.Cocoa.Beans</RootNamespace>
+    <Nullable>enable</Nullable>
+    <Authors>Miyakowww</Authors>
+    <Company>Maila</Company>
+    <Product>Cocoa Beans</Product>
+    <Description>A C# encapsulation of mirai-api-http.</Description>
+    <Copyright>Copyright © Maila 2021</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishDocumentationFile>true</PublishDocumentationFile>
+    <PublishReferencesDocumentationFiles>true</PublishReferencesDocumentationFiles>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Miyakowww/CocoaBeans</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>mirai mirai-api-http maila cocoa</PackageTags>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.0.0.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1591;1701;1702</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1591;1701;1702</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

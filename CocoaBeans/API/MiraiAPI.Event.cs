@@ -14,7 +14,7 @@ namespace Maila.Cocoa.Beans.API
 {
     public static partial class MiraiAPI
     {
-        public static void ListenMessageEvent(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        public static void ListenMessageEventv1(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
         {
             StartListening($"ws://{host}/message?sessionKey={sessionKey}",
                 res =>
@@ -22,6 +22,34 @@ namespace Maila.Cocoa.Beans.API
                     try
                     {
                         var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
+                        var @event = Event.Parse(body);
+                        if (@event is not null)
+                        {
+                            onReceive.Invoke(@event);
+                        }
+                    }
+                    catch { }
+                },
+                onDisconnected, token);
+        }
+        public static void ListenMessageEvent(string host, string sessionKey, string verifyKey, long qqId, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        {
+            StartListening($"ws://{host}/message?sessionKey={sessionKey}&verifyKey={verifyKey}&qq={qqId}",
+                res =>
+                {
+                    try
+                    {
+                        var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
                         var @event = Event.Parse(body);
                         if (@event is not null)
                         {
@@ -33,7 +61,7 @@ namespace Maila.Cocoa.Beans.API
                 onDisconnected, token);
         }
 
-        public static void ListenBotEvent(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        public static void ListenBotEventv1(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
         {
             StartListening($"ws://{host}/event?sessionKey={sessionKey}",
                 res =>
@@ -41,6 +69,34 @@ namespace Maila.Cocoa.Beans.API
                     try
                     {
                         var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
+                        var @event = Event.Parse(body);
+                        if (@event is not null)
+                        {
+                            onReceive.Invoke(@event);
+                        }
+                    }
+                    catch { }
+                },
+                onDisconnected, token);
+        }
+        public static void ListenBotEvent(string host, string sessionKey, string verifyKey, long qqId, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        {
+            StartListening($"ws://{host}/event?sessionKey={sessionKey}&verifyKey={verifyKey}&qq={qqId}",
+                res =>
+                {
+                    try
+                    {
+                        var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
                         var @event = Event.Parse(body);
                         if (@event is not null)
                         {
@@ -52,7 +108,7 @@ namespace Maila.Cocoa.Beans.API
                 onDisconnected, token);
         }
 
-        public static void ListenAllEvent(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        public static void ListenAllEventv1(string host, string sessionKey, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
         {
             StartListening($"ws://{host}/all?sessionKey={sessionKey}",
                 res =>
@@ -60,6 +116,34 @@ namespace Maila.Cocoa.Beans.API
                     try
                     {
                         var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
+                        var @event = Event.Parse(body);
+                        if (@event is not null)
+                        {
+                            onReceive.Invoke(@event);
+                        }
+                    }
+                    catch { }
+                },
+                onDisconnected, token);
+        }
+        public static void ListenAllEvent(string host, string sessionKey, string verifyKey, long qqId, Action<Event> onReceive, Action? onDisconnected, CancellationToken token)
+        {
+            StartListening($"ws://{host}/all?sessionKey={sessionKey}&verifyKey={verifyKey}&qq={qqId}",
+                res =>
+                {
+                    try
+                    {
+                        var body = JsonDocument.Parse(Encoding.UTF8.GetString(res)).RootElement;
+                        if (body.TryGetProperty("syncId", out _))
+                        {
+                            body = body.GetProperty("data");
+                        }
+
                         var @event = Event.Parse(body);
                         if (@event is not null)
                         {

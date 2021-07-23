@@ -35,6 +35,9 @@ namespace Maila.Cocoa.Beans.Models.Events
                 "BotLeaveEventActive" => BotLeaveEventActive.Parse(body),
                 "BotLeaveEventKick" => BotLeaveEventKick.Parse(body),
 
+                "FriendInputStatusChangedEvent" => FriendInputStatusChangedEvent.Parse(body),
+                "FriendNickChangedEvent" => FriendNickChangedEvent.Parse(body),
+
                 "GroupRecallEvent" => GroupRecallEvent.Parse(body),
                 "FriendRecallEvent" => FriendRecallEvent.Parse(body),
 

@@ -35,6 +35,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                 "Json" => JsonMessage.Parse(body),
                 "App" => AppMessage.Parse(body),
                 "Poke" => PokeMessage.Parse(body),
+                "Dice" => DiceMessage.Parse(body),
                 "Forward" => ForwardMessage.Parse(body),
                 "File" => FileMessage.Parse(body),
                 "MusicShare" => MusicShareMessage.Parse(body),

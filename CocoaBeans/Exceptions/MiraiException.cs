@@ -13,7 +13,7 @@ namespace Maila.Cocoa.Beans.Exceptions
         public MiraiException(int statusCode) : base(statusCode switch
         {
             0 => "Success",
-            1 => "Wrong auth key",
+            1 => "Wrong verify key",
             2 => "The specified Bot does not exist",
             3 => "Session is invalid or does not exist",
             4 => "Session is not authenticated or not activated",

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Maila. All rights reserved.
 // Licensed under the GNU AGPLv3
 
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -24,6 +25,13 @@ namespace Maila.Cocoa.Beans.Models.Messages
         public int Time { get; init; }
 
         private SourceMessage() : base("Source") { }
+
+        [Obsolete("You should not use it except for middleware.")]
+        public SourceMessage(int id, int time) : base("Source")
+        {
+            Id = id;
+            Time = time;
+        }
 
         internal new static SourceMessage? Parse(JsonElement body)
         {

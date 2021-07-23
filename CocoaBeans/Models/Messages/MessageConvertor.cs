@@ -39,6 +39,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                     IJsonMessage => typeof(IJsonMessage),
                     IAppMessage => typeof(IAppMessage),
                     IPokeMessage => typeof(IPokeMessage),
+                    IDiceMessage => typeof(IDiceMessage),
                     IForwardMessage => typeof(IForwardMessage),
                     IFileMessage => typeof(IFileMessage),
                     IMusicShareMessage => typeof(IMusicShareMessage),

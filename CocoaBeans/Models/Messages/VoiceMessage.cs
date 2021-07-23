@@ -16,16 +16,12 @@ namespace Maila.Cocoa.Beans.Models.Messages
 
         [JsonPropertyName("url")]
         public string? Url { get; }
-
-        [JsonPropertyName("path")]
-        public string? Path { get; }
     }
 
     public class VoiceMessage : Message, IVoiceMessage
     {
         public string VoiceId { get; init; } = string.Empty;
         public string? Url { get; init; }
-        public string? Path { get; init; }
 
         private VoiceMessage() : base("Voice") { }
 
@@ -36,8 +32,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                 return new()
                 {
                     VoiceId = body.GetProperty("voiceId").GetString() ?? string.Empty,
-                    Url = body.GetProperty("url").GetString(),
-                    Path = body.GetProperty("path").GetString()
+                    Url = body.GetProperty("url").GetString()
                 };
             }
             catch { return null; }

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Maila.Cocoa.Beans.Exceptions;
 using Maila.Cocoa.Beans.Models;
@@ -18,6 +19,10 @@ namespace Maila.Cocoa.Beans.API
         public static async Task<QFriendInfo[]> GetFriendList(string host, string sessionKey)
         {
             var res = await GetAsRequest(host, "friendList", $"sessionKey={sessionKey}");
+            if (res.ValueKind == JsonValueKind.Object)
+            {
+                res = res.GetProperty("data");
+            }
 
             List<QFriendInfo> friends = new();
             foreach (var f in res.EnumerateArray())
@@ -37,6 +42,10 @@ namespace Maila.Cocoa.Beans.API
         public static async Task<QGroupInfo[]> GetGroupList(string host, string sessionKey)
         {
             var res = await GetAsRequest(host, "groupList", $"sessionKey={sessionKey}");
+            if (res.ValueKind == JsonValueKind.Object)
+            {
+                res = res.GetProperty("data");
+            }
 
             List<QGroupInfo> groups = new();
             foreach (var g in res.EnumerateArray())
@@ -56,6 +65,10 @@ namespace Maila.Cocoa.Beans.API
         public static async Task<QMemberInfo[]> GetMemberList(string host, string sessionKey, long group)
         {
             var res = await GetAsRequest(host, "memberList", $"sessionKey={sessionKey}", $"target={group}");
+            if (res.ValueKind == JsonValueKind.Object)
+            {
+                res = res.GetProperty("data");
+            }
 
             List<QMemberInfo> members = new();
             QGroupInfo? groupInfo = QGroupInfo.Parse(res[0].GetProperty("group"));

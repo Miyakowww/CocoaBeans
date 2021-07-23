@@ -16,16 +16,12 @@ namespace Maila.Cocoa.Beans.Models.Messages
 
         [JsonPropertyName("url")]
         public string? Url { get; }
-
-        [JsonPropertyName("path")]
-        public string? Path { get; }
     }
 
     public class ImageMessage : Message, IImageMessage
     {
         public string ImageId { get; init; } = string.Empty;
         public string? Url { get; init; }
-        public string? Path { get; init; }
 
         internal ImageMessage() : base("Image") { }
 
@@ -34,8 +30,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             return new()
             {
                 ImageId = ImageId,
-                Url = Url,
-                Path = Path
+                Url = Url
             };
         }
 
@@ -46,8 +41,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                 return new()
                 {
                     ImageId = body.GetProperty("imageId").GetString() ?? string.Empty,
-                    Url = body.GetProperty("url").GetString(),
-                    Path = body.GetProperty("path").GetString()
+                    Url = body.GetProperty("url").GetString()
                 };
             }
             catch { return null; }

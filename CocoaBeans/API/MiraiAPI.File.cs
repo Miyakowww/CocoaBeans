@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Maila. All rights reserved.
 // Licensed under the GNU AGPLv3
 
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -32,10 +33,10 @@ namespace Maila.Cocoa.Beans.API
 
         /// <summary>Get the details of a specified file.</summary>
         /// <exception cref="WebException" />
-        public static async Task<FileDetails?> GetGroupFileInfo(string host, string sessionKey, long groupId, string fileId)
+        public static async Task<FileDetails> GetGroupFileInfo(string host, string sessionKey, long groupId, string fileId)
         {
             var res = await GetAsRequest(host, "groupFileInfo", $"sessionKey={sessionKey}", $"target={groupId}", $"id={fileId}");
-            return FileDetails.Parse(res);
+            return FileDetails.Parse(res) ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Rename a file.</summary>

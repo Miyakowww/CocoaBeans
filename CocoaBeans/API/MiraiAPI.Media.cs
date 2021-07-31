@@ -19,7 +19,7 @@ namespace Maila.Cocoa.Beans.API
         /// <summary>Upload image files to the server.</summary>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<IImageMessage?> UploadImage(string host, string sessionKey, UploadType type, Stream imgStream)
+        public static async Task<IImageMessage> UploadImage(string host, string sessionKey, UploadType type, Stream imgStream)
         {
             MultipartFormDataContent content = new();
 
@@ -54,13 +54,13 @@ namespace Maila.Cocoa.Beans.API
             }
 
             res = JsonDocument.Parse(await respMsg.Content.ReadAsStringAsync()).RootElement;
-            return ImageMessage.Parse(res);
+            return ImageMessage.Parse(res) ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Upload voice files to the server.</summary>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<IVoiceMessage?> UploadVoice(string host, string sessionKey, Stream voiceStream)
+        public static async Task<IVoiceMessage> UploadVoice(string host, string sessionKey, Stream voiceStream)
         {
             MultipartFormDataContent content = new();
 
@@ -90,57 +90,53 @@ namespace Maila.Cocoa.Beans.API
             }
 
             res = JsonDocument.Parse(await respMsg.Content.ReadAsStringAsync()).RootElement;
-            return VoiceMessage.Parse(res);
+            return VoiceMessage.Parse(res) ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Upload files to group.</summary>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<string?> UploadFileAndSend(string host, string sessionKey, long groupId, string path, Stream fileStream)
+        public static async Task<string> UploadFileAndSend(string host, string sessionKey, long groupId, string path, Stream fileStream)
         {
-            try
+            MultipartFormDataContent content = new();
+
+            StringContent _skey = new(sessionKey);
+            _skey.Headers.ContentDisposition = new("form-data") { Name = "sessionKey" };
+            content.Add(_skey);
+
+            StringContent _type = new("Group");
+            _type.Headers.ContentDisposition = new("form-data") { Name = "type" };
+            content.Add(_type);
+
+            StringContent _target = new(groupId.ToString());
+            _target.Headers.ContentDisposition = new("form-data") { Name = "target" };
+            content.Add(_target);
+
+            StringContent _path = new(path);
+            _path.Headers.ContentDisposition = new("form-data") { Name = "path" };
+            content.Add(_path);
+
+            StreamContent _voice = new(fileStream);
+            _voice.Headers.ContentDisposition = new("form-data") { Name = "file" };
+            content.Add(_voice);
+
+            using HttpClient client = new();
+            using HttpResponseMessage respMsg = await client.PostAsync($"http://{host}/uploadFileAndSend", content);
+
+            JsonElement res;
+            if (!respMsg.IsSuccessStatusCode)
             {
-                MultipartFormDataContent content = new();
-
-                StringContent _skey = new(sessionKey);
-                _skey.Headers.ContentDisposition = new("form-data") { Name = "sessionKey" };
-                content.Add(_skey);
-
-                StringContent _type = new("Group");
-                _type.Headers.ContentDisposition = new("form-data") { Name = "type" };
-                content.Add(_type);
-
-                StringContent _target = new(groupId.ToString());
-                _target.Headers.ContentDisposition = new("form-data") { Name = "target" };
-                content.Add(_target);
-
-                StringContent _path = new(path);
-                _path.Headers.ContentDisposition = new("form-data") { Name = "path" };
-                content.Add(_path);
-
-                StreamContent _voice = new(fileStream);
-                _voice.Headers.ContentDisposition = new("form-data") { Name = "file" };
-                content.Add(_voice);
-
-                using HttpClient client = new();
-                using HttpResponseMessage respMsg = await client.PostAsync($"http://{host}/uploadFileAndSend", content);
-
-                JsonElement res;
-                if (!respMsg.IsSuccessStatusCode)
-                {
-                    throw new WebException(respMsg.StatusCode.ToString());
-                }
-
-                res = JsonDocument.Parse(await respMsg.Content.ReadAsStringAsync()).RootElement;
-                int code = res.GetCode();
-                if (code != 0)
-                {
-                    throw new MiraiException(code);
-                }
-
-                return res.GetProperty("id").GetString();
+                throw new WebException(respMsg.StatusCode.ToString());
             }
-            catch { return null; }
+
+            res = JsonDocument.Parse(await respMsg.Content.ReadAsStringAsync()).RootElement;
+            int code = res.GetCode();
+            if (code != 0)
+            {
+                throw new MiraiException(code);
+            }
+
+            return res.GetProperty("id").GetString() ?? throw new Exception("Invalid response.");
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Maila. All rights reserved.
 // Licensed under the GNU AGPLv3
 
+using System;
 using System.Dynamic;
 using System.Net;
 using System.Text.Json;
@@ -102,7 +103,7 @@ namespace Maila.Cocoa.Beans.API
         /// <summary>Get group configurations.</summary>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<GroupConfig?> GetGroupConfig(string host, string sessionKey, long groupId)
+        public static async Task<GroupConfig> GetGroupConfig(string host, string sessionKey, long groupId)
         {
             string resStr = await GetAsync($"http://{host}/groupConfig?sessionKey={sessionKey}&target={groupId}");
             var res = JsonDocument.Parse(resStr).RootElement;
@@ -113,7 +114,7 @@ namespace Maila.Cocoa.Beans.API
                 throw new MiraiException(code);
             }
 
-            return JsonSerializer.Deserialize<GroupConfig>(resStr);
+            return JsonSerializer.Deserialize<GroupConfig>(resStr) ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Set group configurations.</summary>

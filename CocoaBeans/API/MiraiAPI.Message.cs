@@ -15,7 +15,7 @@ namespace Maila.Cocoa.Beans.API
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendFriendMessage(string host, string sessionKey, long qqId, params IMessage[] chain)
+        public static async Task<int> SendFriendMessage(string host, string sessionKey, long qqId, params IMessage[] chain)
         {
             var res = await new { sessionKey, qq = qqId, messageChain = chain }.PostAsRequest(host, "sendFriendMessage");
 
@@ -29,14 +29,14 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Send reply message to friend.</summary>
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendFriendMessage(string host, string sessionKey, long qqId, int? quote, params IMessage[] chain)
+        public static async Task<int> SendFriendMessage(string host, string sessionKey, long qqId, int? quote, params IMessage[] chain)
         {
             object req = quote is null
                 ? new { sessionKey, qq = qqId, messageChain = chain }
@@ -53,14 +53,14 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Send message to group member.</summary>
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendTempMessage(string host, string sessionKey, long groupId, long qqId, params IMessage[] chain)
+        public static async Task<int> SendTempMessage(string host, string sessionKey, long groupId, long qqId, params IMessage[] chain)
         {
             var res = await new { sessionKey, group = groupId, qq = qqId, messageChain = chain }.PostAsRequest(host, "sendTempMessage");
 
@@ -74,14 +74,14 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Send reply message to group member.</summary>
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendTempMessage(string host, string sessionKey, long groupId, long qqId, int? quote, params IMessage[] chain)
+        public static async Task<int> SendTempMessage(string host, string sessionKey, long groupId, long qqId, int? quote, params IMessage[] chain)
         {
             object req = quote is null
                 ? new { sessionKey, group = groupId, qq = qqId, messageChain = chain }
@@ -98,14 +98,14 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Send message to group.</summary>
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendGroupMessage(string host, string sessionKey, long groupId, params IMessage[] chain)
+        public static async Task<int> SendGroupMessage(string host, string sessionKey, long groupId, params IMessage[] chain)
         {
             var res = await new { sessionKey, group = groupId, messageChain = chain }.PostAsRequest(host, "sendGroupMessage");
 
@@ -119,14 +119,14 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Send reply message to group.</summary>
         /// <returns>MessageID</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<int?> SendGroupMessage(string host, string sessionKey, long groupId, int? quote, params IMessage[] chain)
+        public static async Task<int> SendGroupMessage(string host, string sessionKey, long groupId, int? quote, params IMessage[] chain)
         {
             object req = quote is null
                 ? new { sessionKey, group = groupId, messageChain = chain }
@@ -143,7 +143,7 @@ namespace Maila.Cocoa.Beans.API
             {
                 return res.GetProperty("messageId").GetInt32();
             }
-            catch { return null; }
+            catch { throw new Exception("Invalid response."); }
         }
 
         /// <summary>Recall message.</summary>

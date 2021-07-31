@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Maila. All rights reserved.
 // Licensed under the GNU AGPLv3
 
+using System;
 using System.Net;
 using System.Threading.Tasks;
 using Maila.Cocoa.Beans.Exceptions;
@@ -13,7 +14,7 @@ namespace Maila.Cocoa.Beans.API
         /// <returns>Session Key</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<string?> Authv1(string host, string authKey)
+        public static async Task<string> Authv1(string host, string authKey)
         {
             var res = await new { authKey }.PostAsRequest(host, "auth");
             int code = res.GetCode();
@@ -21,13 +22,13 @@ namespace Maila.Cocoa.Beans.API
             {
                 throw new MiraiException(code);
             }
-            return res.GetProperty("session").GetString() ?? null;
+            return res.GetProperty("session").GetString() ?? throw new Exception("Invalid response.");
         }
         /// <summary>Verify identity and start a Session.</summary>
         /// <returns>Session Key</returns>
         /// <exception cref="MiraiException" />
         /// <exception cref="WebException" />
-        public static async Task<string?> Verify(string host, string verifyKey)
+        public static async Task<string> Verify(string host, string verifyKey)
         {
             var res = await new { verifyKey }.PostAsRequest(host, "verify");
             int code = res.GetCode();
@@ -35,7 +36,7 @@ namespace Maila.Cocoa.Beans.API
             {
                 throw new MiraiException(code);
             }
-            return res.GetProperty("session").GetString() ?? null;
+            return res.GetProperty("session").GetString() ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Verify and activate a Session, and bind the Session to a logged-in Bot.</summary>

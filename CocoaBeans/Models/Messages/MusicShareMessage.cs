@@ -41,21 +41,30 @@ namespace Maila.Cocoa.Beans.Models.Messages
         public string Brief { get; init; } = string.Empty;
 
         private MusicShareMessage() : base("MusicShare") { }
+        public MusicShareMessage(string kind, string title, string summary, string jumpUrl, string pictureUrl, string musicUrl, string brief) : base("MusicShare")
+        {
+            Kind = kind;
+            Title = title;
+            Summary = summary;
+            JumpUrl = jumpUrl;
+            PictureUrl = pictureUrl;
+            MusicUrl = musicUrl;
+            Brief = brief;
+        }
 
         internal new static MusicShareMessage? Parse(JsonElement body)
         {
             try
             {
-                return new()
-                {
-                    Kind = body.GetProperty("kind").GetString() ?? string.Empty,
-                    Title = body.GetProperty("title").GetString() ?? string.Empty,
-                    Summary = body.GetProperty("summary").GetString() ?? string.Empty,
-                    JumpUrl = body.GetProperty("jumpUrl").GetString() ?? string.Empty,
-                    PictureUrl = body.GetProperty("pictureUrl").GetString() ?? string.Empty,
-                    MusicUrl = body.GetProperty("musicUrl").GetString() ?? string.Empty,
-                    Brief = body.GetProperty("brief").GetString() ?? string.Empty
-                };
+                return new(
+                    body.GetProperty("kind").GetString() ?? string.Empty,
+                    body.GetProperty("title").GetString() ?? string.Empty,
+                    body.GetProperty("summary").GetString() ?? string.Empty,
+                    body.GetProperty("jumpUrl").GetString() ?? string.Empty,
+                    body.GetProperty("pictureUrl").GetString() ?? string.Empty,
+                    body.GetProperty("musicUrl").GetString() ?? string.Empty,
+                    body.GetProperty("brief").GetString() ?? string.Empty
+                );
             }
             catch { return null; }
         }

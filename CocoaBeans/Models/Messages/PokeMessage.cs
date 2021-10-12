@@ -23,15 +23,16 @@ namespace Maila.Cocoa.Beans.Models.Messages
         {
             Name = string.Empty;
         }
+        public PokeMessage(string name) : base("Poke")
+        {
+            Name = name;
+        }
 
         internal new static PokeMessage? Parse(JsonElement body)
         {
             try
             {
-                return new()
-                {
-                    Name = body.GetProperty("name").GetString() ?? string.Empty
-                };
+                return new(body.GetProperty("name").GetString() ?? string.Empty);
             }
             catch { return null; }
         }

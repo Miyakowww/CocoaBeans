@@ -29,10 +29,17 @@ namespace Maila.Cocoa.Beans.Models.Messages
         {
             try
             {
+                if (body.TryGetProperty("url", out var url))
+                {
+                    return new()
+                    {
+                        VoiceId = body.GetProperty("voiceId").GetString() ?? string.Empty,
+                        Url = body.GetProperty("url").GetString()
+                    };
+                }
                 return new()
                 {
-                    VoiceId = body.GetProperty("voiceId").GetString() ?? string.Empty,
-                    Url = body.GetProperty("url").GetString()
+                    VoiceId = body.GetProperty("voiceId").GetString() ?? string.Empty
                 };
             }
             catch { return null; }

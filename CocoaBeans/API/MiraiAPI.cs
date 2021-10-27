@@ -17,6 +17,7 @@ namespace Maila.Cocoa.Beans.API
         static MiraiAPI()
         {
             serializerOptions.Converters.Add(new MessageConvertor());
+            serializerOptions.Converters.Add(new ForwardMessageConvertor());
         }
 
         /// <summary>Get mirai-api-http version number.</summary>

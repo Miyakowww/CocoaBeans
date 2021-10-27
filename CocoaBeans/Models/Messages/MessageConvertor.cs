@@ -2,6 +2,7 @@
 // Licensed under the GNU AGPLv3
 
 using System;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -20,6 +21,48 @@ namespace Maila.Cocoa.Beans.Models.Messages
         }
 
         public override void Write(Utf8JsonWriter writer, IMessage[] value, JsonSerializerOptions options)
+        {
+            writer.WriteStartArray();
+            foreach (IMessage m in value)
+            {
+                JsonSerializer.Serialize(writer, m, m switch
+                {
+                    ISourceMessage => typeof(ISourceMessage),
+                    IQuoteMessage => typeof(IQuoteMessage),
+                    IAtMessage => typeof(IAtMessage),
+                    IAtAllMessage => typeof(IAtAllMessage),
+                    IFaceMessage => typeof(IFaceMessage),
+                    IPlainMessage => typeof(IPlainMessage),
+                    IImageMessage => typeof(IImageMessage),
+                    IFlashImageMessage => typeof(IFlashImageMessage),
+                    IVoiceMessage => typeof(IVoiceMessage),
+                    IXmlMessage => typeof(IXmlMessage),
+                    IJsonMessage => typeof(IJsonMessage),
+                    IAppMessage => typeof(IAppMessage),
+                    IPokeMessage => typeof(IPokeMessage),
+                    IDiceMessage => typeof(IDiceMessage),
+                    IForwardMessage => typeof(IForwardMessage),
+                    IFileMessage => typeof(IFileMessage),
+                    IMusicShareMessage => typeof(IMusicShareMessage),
+                    _ => typeof(IMessage)
+                }, options);
+            }
+            writer.WriteEndArray();
+        }
+    }
+
+    public class ForwardMessageConvertor : JsonConverter<ImmutableArray<IMessage>>
+    {
+        public override ImmutableArray<IMessage> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return JsonSerializer.Deserialize<JsonElement>(ref reader, options)
+                                 .EnumerateArray()
+                                 .Select(Message.Parse)
+                                 .OfType<IMessage>()
+                                 .ToImmutableArray();
+        }
+
+        public override void Write(Utf8JsonWriter writer, ImmutableArray<IMessage> value, JsonSerializerOptions options)
         {
             writer.WriteStartArray();
             foreach (IMessage m in value)

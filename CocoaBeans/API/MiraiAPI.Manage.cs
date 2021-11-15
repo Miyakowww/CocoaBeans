@@ -107,14 +107,7 @@ namespace Maila.Cocoa.Beans.API
         {
             string resStr = await GetAsync($"http://{host}/groupConfig?sessionKey={sessionKey}&target={groupId}");
             var res = JsonDocument.Parse(resStr).RootElement;
-
-            int code = res.GetCode();
-            if (code != 0)
-            {
-                throw new MiraiException(code);
-            }
-
-            return JsonSerializer.Deserialize<GroupConfig>(resStr) ?? throw new Exception("Invalid response.");
+            return GroupConfig.Parse(res) ?? throw new Exception("Invalid response.");
         }
 
         /// <summary>Set group configurations.</summary>
@@ -126,29 +119,29 @@ namespace Maila.Cocoa.Beans.API
             req.sessionKey = sessionKey;
             req.target = groupId;
 
-            if (config.name is not null)
+            if (config.Name is not null)
             {
-                req.config.name = config.name;
+                req.config.name = config.Name;
             }
-            if (config.announcement is not null)
+            if (config.Announcement is not null)
             {
-                req.config.announcement = config.announcement;
+                req.config.announcement = config.Announcement;
             }
-            if (config.confessTalk is not null)
+            if (config.ConfessTalk is not null)
             {
-                req.config.confessTalk = config.confessTalk;
+                req.config.confessTalk = config.ConfessTalk;
             }
-            if (config.allowMemberInvite is not null)
+            if (config.AllowMemberInvite is not null)
             {
-                req.config.allowMemberInvite = config.allowMemberInvite;
+                req.config.allowMemberInvite = config.AllowMemberInvite;
             }
-            if (config.autoApprove is not null)
+            if (config.AutoApprove is not null)
             {
-                req.config.autoApprove = config.autoApprove;
+                req.config.autoApprove = config.AutoApprove;
             }
-            if (config.anonymousChat is not null)
+            if (config.AnonymousChat is not null)
             {
-                req.config.anonymousChat = config.anonymousChat;
+                req.config.anonymousChat = config.AnonymousChat;
             }
 
             int code = (await ((object)req).PostAsRequest(host, "groupConfig")).GetCode();

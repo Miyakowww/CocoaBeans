@@ -118,6 +118,7 @@ namespace Maila.Cocoa.Beans.API
             dynamic req = new ExpandoObject();
             req.sessionKey = sessionKey;
             req.target = groupId;
+            req.config = new ExpandoObject();
 
             if (config.Name is not null)
             {

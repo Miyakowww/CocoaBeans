@@ -69,6 +69,10 @@ namespace Maila.Cocoa.Beans.API
             {
                 res = res.GetProperty("data");
             }
+            if (res.GetArrayLength() < 1)
+            {
+                return Array.Empty<QMemberInfo>();
+            }
 
             List<QMemberInfo> members = new();
             QGroupInfo? groupInfo = QGroupInfo.Parse(res[0].GetProperty("group"));

@@ -29,10 +29,23 @@ namespace Maila.Cocoa.Beans.Models.Events
         {
             try
             {
+                long subjectId;
+                SubjectKind subjectKind;
+                if (body.TryGetProperty("subject", out var subject))
+                {
+                    subjectId = subject.GetProperty("id").GetInt64();
+                    subjectKind = Enum.Parse<SubjectKind>(subject.GetProperty("kind").GetString() ?? string.Empty);
+                }
+                else
+                {
+                    subjectId = body.GetProperty("subjectId").GetInt64();
+                    subjectKind = Enum.Parse<SubjectKind>(body.GetProperty("subjectKind").GetString() ?? string.Empty);
+                }
+
                 return new(body.GetProperty("fromId").GetInt64(),
                            body.GetProperty("target").GetInt64(),
-                           body.GetProperty("subjectId").GetInt64(),
-                           Enum.Parse<SubjectKind>(body.GetProperty("subjectKind").GetString() ?? string.Empty),
+                           subjectId,
+                           subjectKind,
                            body.GetProperty("action").GetString() ?? string.Empty,
                            body.GetProperty("suffix").GetString() ?? string.Empty);
             }

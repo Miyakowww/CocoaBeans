@@ -14,9 +14,6 @@ namespace Maila.Cocoa.Beans.Models.Messages
         [JsonPropertyName("id")]
         public string Id { get; }
 
-        [JsonPropertyName("internalId")]
-        public int InternalId { get; }
-
         [JsonPropertyName("name")]
         public string Name { get; }
 
@@ -27,7 +24,6 @@ namespace Maila.Cocoa.Beans.Models.Messages
     public class FileMessage : Message, IFileMessage
     {
         public string Id { get; init; } = string.Empty;
-        public int InternalId { get; init; }
         public string Name { get; init; } = string.Empty;
         public long Size { get; init; }
 
@@ -40,7 +36,6 @@ namespace Maila.Cocoa.Beans.Models.Messages
                 return new()
                 {
                     Id = body.GetProperty("id").GetString() ?? string.Empty,
-                    InternalId = body.GetProperty("internalId").GetInt32(),
                     Name = body.GetProperty("name").GetString() ?? string.Empty,
                     Size = body.GetProperty("size").GetInt64()
                 };

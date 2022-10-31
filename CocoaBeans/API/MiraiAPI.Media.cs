@@ -2,8 +2,6 @@
 // Licensed under the GNU AGPLv3
 
 using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -11,6 +9,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Maila.Cocoa.Beans.Exceptions;
 using Maila.Cocoa.Beans.Models.Messages;
+using SkiaSharp;
 
 namespace Maila.Cocoa.Beans.API
 {
@@ -31,11 +30,9 @@ namespace Maila.Cocoa.Beans.API
             _type.Headers.ContentDisposition = new("form-data") { Name = "type" };
             content.Add(_type);
 
-            using Image img = Image.FromStream(imgStream);
-            await using MemoryStream ms = new();
-            img.Save(ms, ImageFormat.Png);
-            ms.Seek(0, SeekOrigin.Begin);
-            StreamContent _img = new(ms);
+            using SKImage img = SKImage.FromEncodedData(imgStream);
+            using Stream encodedImgStream = img.Encode(SKEncodedImageFormat.Png, 100).AsStream();
+            StreamContent _img = new(encodedImgStream);
             _img.Headers.ContentDisposition = new("form-data")
             {
                 Name = "img",

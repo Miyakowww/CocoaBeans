@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
     <AssemblyName>Maila.Cocoa.Beans</AssemblyName>
     <RootNamespace>Maila.Cocoa.Beans</RootNamespace>
     <Nullable>enable</Nullable>
@@ -21,7 +21,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>mirai mirai-api-http maila cocoa</PackageTags>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
-    <Version>1.1.12</Version>
+    <Version>1.1.13</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

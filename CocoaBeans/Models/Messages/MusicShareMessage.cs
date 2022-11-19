@@ -8,6 +8,9 @@ namespace Maila.Cocoa.Beans.Models.Messages
 {
     public interface IMusicShareMessage : IMessage
     {
+        [JsonPropertyName("type")]
+        public string Type { get; }
+
         [JsonPropertyName("kind")]
         public string Kind { get; }
 

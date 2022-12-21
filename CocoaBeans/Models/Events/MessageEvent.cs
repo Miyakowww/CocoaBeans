@@ -120,4 +120,78 @@ namespace Maila.Cocoa.Beans.Models.Events
             catch { return null; }
         }
     }
+
+    public class StrangerMessageEvent : Event
+    {
+        public ImmutableArray<Message> MessageChain { get; }
+        public QStrangerInfo Sender { get; }
+
+        private StrangerMessageEvent(ImmutableArray<Message> messageChain, QStrangerInfo sender) : base("StrangerMessage")
+        {
+            MessageChain = messageChain;
+            Sender = sender;
+        }
+
+        internal new static StrangerMessageEvent? Parse(JsonElement body)
+        {
+            try
+            {
+                List<Message> chain = new();
+                foreach (var item in body.GetProperty("messageChain").EnumerateArray())
+                {
+                    var msg = Message.Parse(item);
+                    if (msg is not null)
+                    {
+                        chain.Add(msg);
+                    }
+                }
+
+                QStrangerInfo? sender = QStrangerInfo.Parse(body.GetProperty("sender"));
+                if (sender is null)
+                {
+                    return null;
+                }
+
+                return new(chain.ToImmutableArray(), sender);
+            }
+            catch { return null; }
+        }
+    }
+
+    public class OtherClientMessageEvent : Event
+    {
+        public ImmutableArray<Message> MessageChain { get; }
+        public QClientInfo Sender { get; }
+
+        private OtherClientMessageEvent(ImmutableArray<Message> messageChain, QClientInfo sender) : base("OtherClientMessage")
+        {
+            MessageChain = messageChain;
+            Sender = sender;
+        }
+
+        internal new static OtherClientMessageEvent? Parse(JsonElement body)
+        {
+            try
+            {
+                List<Message> chain = new();
+                foreach (var item in body.GetProperty("messageChain").EnumerateArray())
+                {
+                    var msg = Message.Parse(item);
+                    if (msg is not null)
+                    {
+                        chain.Add(msg);
+                    }
+                }
+
+                var sender = QClientInfo.Parse(body.GetProperty("sender"));
+                if (sender is null)
+                {
+                    return null;
+                }
+
+                return new(chain.ToImmutableArray(), sender);
+            }
+            catch { return null; }
+        }
+    }
 }

@@ -207,4 +207,20 @@ namespace Maila.Cocoa.Beans.Models.Events
             return group is null ? null : new(group);
         }
     }
+
+    public class BotLeaveEventDisband : Event
+    {
+        public QGroupInfo Group { get; }
+
+        private BotLeaveEventDisband(QGroupInfo group) : base("BotLeaveEventDisband")
+        {
+            Group = group;
+        }
+
+        internal new static BotLeaveEventDisband? Parse(JsonElement body)
+        {
+            var group = QGroupInfo.Parse(body.GetProperty("group"));
+            return group is null ? null : new(group);
+        }
+    }
 }

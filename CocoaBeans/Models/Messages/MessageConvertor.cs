@@ -44,6 +44,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                     IForwardMessage => typeof(IForwardMessage),
                     IFileMessage => typeof(IFileMessage),
                     IMusicShareMessage => typeof(IMusicShareMessage),
+                    IMiraiCodeMessage => typeof(IMiraiCodeMessage),
                     _ => typeof(IMessage)
                 }, options);
             }
@@ -86,6 +87,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                     IForwardMessage => typeof(IForwardMessage),
                     IFileMessage => typeof(IFileMessage),
                     IMusicShareMessage => typeof(IMusicShareMessage),
+                    IMiraiCodeMessage => typeof(IMiraiCodeMessage),
                     _ => typeof(IMessage)
                 }, options);
             }

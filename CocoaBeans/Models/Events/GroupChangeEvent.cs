@@ -489,4 +489,47 @@ namespace Maila.Cocoa.Beans.Models.Events
             catch { return null; }
         }
     }
+
+    public class MemberHonorChangeEvent : Event
+    {
+        public QMemberInfo Member { get; }
+        public ActionType Action { get; }
+        public string Honor { get; }
+
+        private MemberHonorChangeEvent(QMemberInfo member, ActionType action, string honor) : base("MemberHonorChangeEvent")
+        {
+            Member = member;
+            Action = action;
+            Honor = honor;
+        }
+
+        internal new static MemberHonorChangeEvent? Parse(JsonElement body)
+        {
+            try
+            {
+                QMemberInfo? member = QMemberInfo.Parse(body.GetProperty("member"));
+                if (member is null)
+                {
+                    return null;
+                }
+
+                var action = body.GetProperty("action").GetString() switch
+                {
+                    "achieve" => ActionType.Achieve,
+                    "lose" => ActionType.Lose,
+                    _ => throw new Exception(),
+                };
+                var honor = body.GetProperty("honor").GetString() ?? string.Empty;
+
+                return new(member, action, honor);
+            }
+            catch { return null; }
+        }
+
+        public enum ActionType
+        {
+            Achieve,
+            Lose,
+        }
+    }
 }

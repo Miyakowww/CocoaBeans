@@ -39,6 +39,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
                 "Forward" => ForwardMessage.Parse(body),
                 "File" => FileMessage.Parse(body),
                 "MusicShare" => MusicShareMessage.Parse(body),
+                "MiraiCode" => MiraiCodeMessage.Parse(body),
                 { Length: > 0 } type => throw new UnsupportedMessageTypeException(type),
                 _ => null
             };

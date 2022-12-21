@@ -22,6 +22,8 @@ namespace Maila.Cocoa.Beans.Models.Events
                 "FriendMessage" => FriendMessageEvent.Parse(body),
                 "GroupMessage" => GroupMessageEvent.Parse(body),
                 "TempMessage" => TempMessageEvent.Parse(body),
+                "StrangerMessage" => StrangerMessageEvent.Parse(body),
+                "OtherClientMessage" => OtherClientMessageEvent.Parse(body),
 
                 "BotOnlineEvent" => BotOnlineEvent.Parse(body),
                 "BotOfflineEventActive" => BotOfflineEventActive.Parse(body),
@@ -34,6 +36,7 @@ namespace Maila.Cocoa.Beans.Models.Events
                 "BotJoinGroupEvent" => BotJoinGroupEvent.Parse(body),
                 "BotLeaveEventActive" => BotLeaveEventActive.Parse(body),
                 "BotLeaveEventKick" => BotLeaveEventKick.Parse(body),
+                "BotLeaveEventDisband" => BotLeaveEventDisband.Parse(body),
 
                 "FriendInputStatusChangedEvent" => FriendInputStatusChangedEvent.Parse(body),
                 "FriendNickChangedEvent" => FriendNickChangedEvent.Parse(body),
@@ -55,10 +58,14 @@ namespace Maila.Cocoa.Beans.Models.Events
                 "MemberPermissionChangeEvent" => MemberPermissionChangeEvent.Parse(body),
                 "MemberMuteEvent" => MemberMuteEvent.Parse(body),
                 "MemberUnmuteEvent" => MemberUnmuteEvent.Parse(body),
+                "MemberHonorChangeEvent" => MemberHonorChangeEvent.Parse(body),
 
                 "NewFriendRequestEvent" => NewFriendRequestEvent.Parse(body),
                 "MemberJoinRequestEvent" => MemberJoinRequestEvent.Parse(body),
                 "BotInvitedJoinGroupRequestEvent" => BotInvitedJoinGroupRequestEvent.Parse(body),
+
+                "OtherClientOnlineEvent" => OtherClientOnlineEvent.Parse(body),
+                "OtherClientOfflineEvent" => OtherClientOfflineEvent.Parse(body),
 
                 "NudgeEvent" => NudgeEvent.Parse(body),
 

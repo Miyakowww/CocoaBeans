@@ -348,11 +348,15 @@ namespace Maila.Cocoa.Beans.Models.Events
                     return null;
                 }
 
-                var @operator = body.GetProperty("operator");
+                QMemberInfo? @operator = null;
+                if (body.TryGetProperty("operator", out var operatorElem))
+                {
+                    @operator = QMemberInfo.Parse(operatorElem, member.Group);
+                }
+
                 return new(body.GetProperty("origin").GetString() ?? string.Empty,
                            body.GetProperty("current").GetString() ?? string.Empty,
-                           member,
-                           @operator.ValueKind == JsonValueKind.Null ? null : QMemberInfo.Parse(@operator, member.Group));
+                           member, @operator);
             }
             catch { return null; }
         }

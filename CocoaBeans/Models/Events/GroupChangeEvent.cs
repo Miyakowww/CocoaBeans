@@ -328,14 +328,15 @@ namespace Maila.Cocoa.Beans.Models.Events
         public string Origin { get; }
         public string Current { get; }
         public QMemberInfo Member { get; }
-        public QMemberInfo? Operator { get; }
 
-        private MemberCardChangeEvent(string origin, string current, QMemberInfo member, QMemberInfo? @operator) : base("MemberCardChangeEvent")
+        [Obsolete("Because this event is monitored and broadcast by Mirai, the `Operator` property will always be null and might remove in the newer version.")]
+        public QMemberInfo? Operator { get; } = null;
+
+        private MemberCardChangeEvent(string origin, string current, QMemberInfo member) : base("MemberCardChangeEvent")
         {
             Origin = origin;
             Current = current;
             Member = member;
-            Operator = @operator;
         }
 
         internal new static MemberCardChangeEvent? Parse(JsonElement body)
@@ -348,15 +349,9 @@ namespace Maila.Cocoa.Beans.Models.Events
                     return null;
                 }
 
-                QMemberInfo? @operator = null;
-                if (body.TryGetProperty("operator", out var operatorElem))
-                {
-                    @operator = QMemberInfo.Parse(operatorElem, member.Group);
-                }
-
                 return new(body.GetProperty("origin").GetString() ?? string.Empty,
                            body.GetProperty("current").GetString() ?? string.Empty,
-                           member, @operator);
+                           member);
             }
             catch { return null; }
         }

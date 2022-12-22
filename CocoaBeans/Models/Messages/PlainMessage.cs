@@ -34,7 +34,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Text = text;
         }
 
-        internal new static PlainMessage? Parse(JsonElement body)
+        internal static new PlainMessage? Parse(JsonElement body)
         {
             string? text;
             try

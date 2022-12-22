@@ -40,7 +40,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
 
         private QuoteMessage() : base("Quote") { }
 
-        internal new static QuoteMessage? Parse(JsonElement body)
+        internal static new QuoteMessage? Parse(JsonElement body)
         {
             try
             {

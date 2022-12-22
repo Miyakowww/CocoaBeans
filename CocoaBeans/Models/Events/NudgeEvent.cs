@@ -25,7 +25,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Suffix = suffix;
         }
 
-        internal new static NudgeEvent? Parse(JsonElement body)
+        internal static new NudgeEvent? Parse(JsonElement body)
         {
             try
             {

@@ -30,7 +30,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             FaceId = faceId;
         }
 
-        internal new static FaceMessage? Parse(JsonElement body)
+        internal static new FaceMessage? Parse(JsonElement body)
         {
             try
             {

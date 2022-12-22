@@ -16,7 +16,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Inputting = inputting;
         }
 
-        internal new static FriendInputStatusChangedEvent? Parse(JsonElement body)
+        internal static new FriendInputStatusChangedEvent? Parse(JsonElement body)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             To = to;
         }
 
-        internal new static FriendNickChangedEvent? Parse(JsonElement body)
+        internal static new FriendNickChangedEvent? Parse(JsonElement body)
         {
             try
             {

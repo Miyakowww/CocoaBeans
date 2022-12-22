@@ -27,7 +27,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             NodeList = nodeList.ToImmutableArray();
         }
 
-        internal new static ForwardMessage? Parse(JsonElement body)
+        internal static new ForwardMessage? Parse(JsonElement body)
         {
             try
             {

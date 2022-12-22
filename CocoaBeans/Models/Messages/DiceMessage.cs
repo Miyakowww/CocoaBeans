@@ -26,7 +26,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Value = value;
         }
 
-        internal new static DiceMessage? Parse(JsonElement body)
+        internal static new DiceMessage? Parse(JsonElement body)
         {
             try
             {

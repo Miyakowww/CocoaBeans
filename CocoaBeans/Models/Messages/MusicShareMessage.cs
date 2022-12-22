@@ -55,7 +55,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Brief = brief;
         }
 
-        internal new static MusicShareMessage? Parse(JsonElement body)
+        internal static new MusicShareMessage? Parse(JsonElement body)
         {
             try
             {

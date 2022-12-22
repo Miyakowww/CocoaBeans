@@ -34,7 +34,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             };
         }
 
-        internal new static FlashImageMessage? Parse(JsonElement body)
+        internal static new FlashImageMessage? Parse(JsonElement body)
         {
             try
             {

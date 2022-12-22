@@ -28,7 +28,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Name = name;
         }
 
-        internal new static PokeMessage? Parse(JsonElement body)
+        internal static new PokeMessage? Parse(JsonElement body)
         {
             try
             {

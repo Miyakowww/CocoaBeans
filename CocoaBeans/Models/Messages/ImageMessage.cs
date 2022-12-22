@@ -34,7 +34,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             };
         }
 
-        internal new static ImageMessage? Parse(JsonElement body)
+        internal static new ImageMessage? Parse(JsonElement body)
         {
             try
             {

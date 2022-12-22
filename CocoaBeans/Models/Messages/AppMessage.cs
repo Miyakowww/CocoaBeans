@@ -26,7 +26,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Content = content;
         }
 
-        internal new static AppMessage? Parse(JsonElement body)
+        internal static new AppMessage? Parse(JsonElement body)
         {
             string? content;
             try

@@ -30,7 +30,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Target = target;
         }
 
-        internal new static AtMessage? Parse(JsonElement body)
+        internal static new AtMessage? Parse(JsonElement body)
         {
             try
             {

@@ -26,7 +26,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Code = code;
         }
 
-        internal new static MiraiCodeMessage? Parse(JsonElement body)
+        internal static new MiraiCodeMessage? Parse(JsonElement body)
         {
             try
             {

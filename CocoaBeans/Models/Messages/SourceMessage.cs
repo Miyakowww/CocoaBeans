@@ -33,7 +33,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Time = time;
         }
 
-        internal new static SourceMessage? Parse(JsonElement body)
+        internal static new SourceMessage? Parse(JsonElement body)
         {
             try
             {

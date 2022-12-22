@@ -25,7 +25,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
 
         private VoiceMessage() : base("Voice") { }
 
-        internal new static VoiceMessage? Parse(JsonElement body)
+        internal static new VoiceMessage? Parse(JsonElement body)
         {
             try
             {

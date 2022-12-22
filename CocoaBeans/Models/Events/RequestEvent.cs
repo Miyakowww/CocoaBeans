@@ -24,7 +24,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Message = message;
         }
 
-        internal new static NewFriendRequestEvent? Parse(JsonElement body)
+        internal static new NewFriendRequestEvent? Parse(JsonElement body)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Message = message;
         }
 
-        internal new static MemberJoinRequestEvent? Parse(JsonElement body)
+        internal static new MemberJoinRequestEvent? Parse(JsonElement body)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Message = message;
         }
 
-        internal new static BotInvitedJoinGroupRequestEvent? Parse(JsonElement body)
+        internal static new BotInvitedJoinGroupRequestEvent? Parse(JsonElement body)
         {
             try
             {

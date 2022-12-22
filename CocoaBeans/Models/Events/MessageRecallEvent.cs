@@ -22,7 +22,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupRecallEvent? Parse(JsonElement body)
+        internal static new GroupRecallEvent? Parse(JsonElement body)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static FriendRecallEvent? Parse(JsonElement body)
+        internal static new FriendRecallEvent? Parse(JsonElement body)
         {
             try
             {

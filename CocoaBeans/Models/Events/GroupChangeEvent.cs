@@ -21,7 +21,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupNameChangeEvent? Parse(JsonElement body)
+        internal static new GroupNameChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupEntranceAnnouncementChangeEvent? Parse(JsonElement body)
+        internal static new GroupEntranceAnnouncementChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupMuteAllEvent? Parse(JsonElement body)
+        internal static new GroupMuteAllEvent? Parse(JsonElement body)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupAllowAnonymousChatEvent? Parse(JsonElement body)
+        internal static new GroupAllowAnonymousChatEvent? Parse(JsonElement body)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             IsByBot = isByBot;
         }
 
-        internal new static GroupAllowConfessTalkEvent? Parse(JsonElement body)
+        internal static new GroupAllowConfessTalkEvent? Parse(JsonElement body)
         {
             try
             {
@@ -215,7 +215,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static GroupAllowMemberInviteEvent? Parse(JsonElement body)
+        internal static new GroupAllowMemberInviteEvent? Parse(JsonElement body)
         {
             try
             {
@@ -249,7 +249,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Member = member;
         }
 
-        internal new static MemberJoinEvent? Parse(JsonElement body)
+        internal static new MemberJoinEvent? Parse(JsonElement body)
         {
             try
             {
@@ -276,7 +276,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static MemberLeaveEventKick? Parse(JsonElement body)
+        internal static new MemberLeaveEventKick? Parse(JsonElement body)
         {
             try
             {
@@ -307,7 +307,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Member = member;
         }
 
-        internal new static MemberLeaveEventQuit? Parse(JsonElement body)
+        internal static new MemberLeaveEventQuit? Parse(JsonElement body)
         {
             try
             {
@@ -339,7 +339,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Member = member;
         }
 
-        internal new static MemberCardChangeEvent? Parse(JsonElement body)
+        internal static new MemberCardChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -370,7 +370,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Member = member;
         }
 
-        internal new static MemberSpecialTitleChangeEvent? Parse(JsonElement body)
+        internal static new MemberSpecialTitleChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -401,7 +401,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Member = member;
         }
 
-        internal new static MemberPermissionChangeEvent? Parse(JsonElement body)
+        internal static new MemberPermissionChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -432,7 +432,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static MemberMuteEvent? Parse(JsonElement body)
+        internal static new MemberMuteEvent? Parse(JsonElement body)
         {
             try
             {
@@ -467,7 +467,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static MemberUnmuteEvent? Parse(JsonElement body)
+        internal static new MemberUnmuteEvent? Parse(JsonElement body)
         {
             try
             {
@@ -502,7 +502,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Honor = honor;
         }
 
-        internal new static MemberHonorChangeEvent? Parse(JsonElement body)
+        internal static new MemberHonorChangeEvent? Parse(JsonElement body)
         {
             try
             {

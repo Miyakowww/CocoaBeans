@@ -20,7 +20,7 @@ namespace Maila.Cocoa.Beans.Models.Events
     {
         private BotOnlineEvent(long qq) : base(qq, "BotOnlineEvent") { }
 
-        internal new static BotOnlineEvent? Parse(JsonElement body)
+        internal static new BotOnlineEvent? Parse(JsonElement body)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Maila.Cocoa.Beans.Models.Events
     {
         private BotOfflineEventActive(long qq) : base(qq, "BotOfflineEventActive") { }
 
-        internal new static BotOfflineEventActive? Parse(JsonElement body)
+        internal static new BotOfflineEventActive? Parse(JsonElement body)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Maila.Cocoa.Beans.Models.Events
     {
         private BotOfflineEventForce(long qq) : base(qq, "BotOfflineEventForce") { }
 
-        internal new static BotOfflineEventForce? Parse(JsonElement body)
+        internal static new BotOfflineEventForce? Parse(JsonElement body)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Maila.Cocoa.Beans.Models.Events
     {
         private BotOfflineEventDropped(long qq) : base(qq, "BotOfflineEventDropped") { }
 
-        internal new static BotOfflineEventDropped? Parse(JsonElement body)
+        internal static new BotOfflineEventDropped? Parse(JsonElement body)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace Maila.Cocoa.Beans.Models.Events
     {
         private BotReloginEvent(long qq) : base(qq, "BotReloginEvent") { }
 
-        internal new static BotReloginEvent? Parse(JsonElement body)
+        internal static new BotReloginEvent? Parse(JsonElement body)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Group = group;
         }
 
-        internal new static BotGroupPermissionChangeEvent? Parse(JsonElement body)
+        internal static new BotGroupPermissionChangeEvent? Parse(JsonElement body)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static BotMuteEvent? Parse(JsonElement body)
+        internal static new BotMuteEvent? Parse(JsonElement body)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Operator = @operator;
         }
 
-        internal new static BotUnmuteEvent? Parse(JsonElement body)
+        internal static new BotUnmuteEvent? Parse(JsonElement body)
         {
             var member = QMemberInfo.Parse(body.GetProperty("operator"));
             return member is null ? null : new(member);
@@ -169,7 +169,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Group = group;
         }
 
-        internal new static BotJoinGroupEvent? Parse(JsonElement body)
+        internal static new BotJoinGroupEvent? Parse(JsonElement body)
         {
             var group = QGroupInfo.Parse(body.GetProperty("group"));
             return group is null ? null : new(group);
@@ -185,7 +185,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Group = group;
         }
 
-        internal new static BotLeaveEventActive? Parse(JsonElement body)
+        internal static new BotLeaveEventActive? Parse(JsonElement body)
         {
             var group = QGroupInfo.Parse(body.GetProperty("group"));
             return group is null ? null : new(group);
@@ -201,7 +201,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Group = group;
         }
 
-        internal new static BotLeaveEventKick? Parse(JsonElement body)
+        internal static new BotLeaveEventKick? Parse(JsonElement body)
         {
             var group = QGroupInfo.Parse(body.GetProperty("group"));
             return group is null ? null : new(group);
@@ -217,7 +217,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Group = group;
         }
 
-        internal new static BotLeaveEventDisband? Parse(JsonElement body)
+        internal static new BotLeaveEventDisband? Parse(JsonElement body)
         {
             var group = QGroupInfo.Parse(body.GetProperty("group"));
             return group is null ? null : new(group);

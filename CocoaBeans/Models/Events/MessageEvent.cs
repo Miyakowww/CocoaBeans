@@ -19,7 +19,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Sender = sender;
         }
 
-        internal new static FriendMessageEvent? Parse(JsonElement body)
+        internal static new FriendMessageEvent? Parse(JsonElement body)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Sender = sender;
         }
 
-        internal new static GroupMessageEvent? Parse(JsonElement body)
+        internal static new GroupMessageEvent? Parse(JsonElement body)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Sender = sender;
         }
 
-        internal new static TempMessageEvent? Parse(JsonElement body)
+        internal static new TempMessageEvent? Parse(JsonElement body)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Sender = sender;
         }
 
-        internal new static StrangerMessageEvent? Parse(JsonElement body)
+        internal static new StrangerMessageEvent? Parse(JsonElement body)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Sender = sender;
         }
 
-        internal new static OtherClientMessageEvent? Parse(JsonElement body)
+        internal static new OtherClientMessageEvent? Parse(JsonElement body)
         {
             try
             {

@@ -29,7 +29,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
 
         private FileMessage() : base("File") { }
 
-        internal new static FileMessage? Parse(JsonElement body)
+        internal static new FileMessage? Parse(JsonElement body)
         {
             try
             {

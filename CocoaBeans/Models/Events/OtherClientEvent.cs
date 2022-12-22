@@ -14,7 +14,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Client = client;
         }
 
-        internal new static OtherClientOnlineEvent? Parse(JsonElement body)
+        internal static new OtherClientOnlineEvent? Parse(JsonElement body)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Maila.Cocoa.Beans.Models.Events
             Client = client;
         }
 
-        internal new static OtherClientOfflineEvent? Parse(JsonElement body)
+        internal static new OtherClientOfflineEvent? Parse(JsonElement body)
         {
             try
             {

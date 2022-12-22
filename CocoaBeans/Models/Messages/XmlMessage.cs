@@ -26,7 +26,7 @@ namespace Maila.Cocoa.Beans.Models.Messages
             Xml = xml;
         }
 
-        internal new static XmlMessage? Parse(JsonElement body)
+        internal static new XmlMessage? Parse(JsonElement body)
         {
             try
             {
